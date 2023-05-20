@@ -113,6 +113,12 @@ app.get("/myAllToys/:email", async(req,res) =>{
         res.send(result);
       });
 
+       app.delete("/deleteToy/:id", async (req, res) => {
+         const id = req.params.id;
+         const filter = { _id: new ObjectId(id) };
+         const result = await toysCollection.deleteOne(filter);
+         res.send(result);
+       });
 
 
 
