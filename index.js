@@ -97,6 +97,14 @@ app.get("/myAllToys/:email", async(req,res) =>{
          return res.send(toys);
     })
 
+    app.get("/toyDetails/:id", async(req, res) =>{
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const data = await toysCollection.findOne(filter)
+      res.send(data)
+    })
+
+
       app.put("/updateToy/:id", async (req, res) => {
         const id = req.params.id;
         const body = req.body;
