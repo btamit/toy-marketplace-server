@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 require('dotenv').config();
 const app = express();
@@ -96,6 +96,27 @@ app.get("/myAllToys/:email", async(req,res) =>{
         .toArray();
          return res.send(toys);
     })
+
+      app.put("/updateToy/:id", async (req, res) => {
+        const id = req.params.id;
+        const body = req.body;
+        console.log(body);
+        const filter = { _id: new ObjectId(id) };
+        const updateToy = {
+          $set: {
+            price: body.price,
+            quantity: body.quantity,
+            description: body.description,
+          },
+        };
+        const result = await toysCollection.updateOne(filter, updateToy);
+        res.send(result);
+      });
+
+
+
+
+
  }finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
