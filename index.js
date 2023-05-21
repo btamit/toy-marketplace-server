@@ -51,15 +51,17 @@ async function run() {
 
 
 app.get("/allToys", async (req, res) =>{
-  const allToys = await toysCollection.find({}).toArray();
+  const allToys = await toysCollection.find({}).limit(20).toArray();
   res.send(allToys)
 })
 
 app.get("/myToys/:email", async(req, res) =>{
   console.log(req.params.email);
-  const result = await toysCollection.find({email:req.params.email}).sort({price:1}).toArray();
+  const result = await toysCollection.find({email:req.params.email}).sort({price:-1}).toArray();
   res.send(result);
 })
+
+
 
 
   app.get("/toySearch/:text", async (req, res) => {
