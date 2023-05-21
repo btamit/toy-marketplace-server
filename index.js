@@ -80,7 +80,7 @@ app.get("/allToys", async (req, res) =>{
 
 app.get("/myToys/:email", async(req, res) =>{
   console.log(req.params.email);
-  const result = await toysCollection.find({email:req.params.email}).toArray();
+  const result = await toysCollection.find({email:req.params.email}).sort({price:1}).toArray();
   res.send(result);
 })
 
