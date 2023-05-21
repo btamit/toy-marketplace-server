@@ -5,16 +5,14 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
+// Middle ware
 app.use(cors());
 app.use(express.json());
-
 
 app.get('/',(req,res) =>{
     res.send('toy shop server is running')
 })
 
-console.log(process.env.DB_USER)
-console.log(process.env.DB_PASS)
 const uri =
   `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cjvdbic.mongodb.net/?retryWrites=true&w=majority`;
 console.log(uri);
