@@ -55,15 +55,48 @@ app.get("/allToys", async (req, res) =>{
   res.send(allToys)
 })
 
-app.get("/myAllToys/:email", async(req,res) =>{
-   console.log(req.params.email)
-  const result = await toysCollection
-  .find({
-    postedBy:req.params.email
-  })
-  .toArray();
-  res.send(result)
+// My All Toys 
+// app.get("/myAllToys/:email", async(req,res) =>{
+//    console.log(req.params.email)
+//   const result = await toysCollection
+//   .find({
+//     postedBy:req.params.email
+//   })
+//   .toArray();
+//   res.send(result)
+// })
+
+// My Toys by query 
+// app.get("/myAllToys", async(req,res) =>{
+//   console.log(req.query);
+//   let query = {};
+//   if(req.query ?.email){
+//     query = {email:req.query.email}
+//   }
+//   const result = await toysCollection.find(query).toArray();
+//   res.send(result);
+// })
+
+
+app.get("/myToys/:email", async(req, res) =>{
+  console.log(req.params.email);
+  const result = await toysCollection.find({email:req.params.email}).toArray();
+  res.send(result);
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   app.get("/toySearch/:text", async (req, res) => {
     const searchText = req.params.text;
